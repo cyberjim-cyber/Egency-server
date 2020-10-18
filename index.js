@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 
 const port = 5000;
 
-const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.e8uzr.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0-shard-00-00.emqen.mongodb.net:27017,cluster0-shard-00-01.emqen.mongodb.net:27017,cluster0-shard-00-02.emqen.mongodb.net:27017/${process.env.DB_NAME}?ssl=true&replicaSet=atlas-y2z8ln-shard-0&authSource=admin&retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 client.connect((err) => {
@@ -107,6 +107,15 @@ app.listen(process.env.PORT || port);
 
 
 
+
+var MongoClient = require('mongodb').MongoClient;
+
+var uri = "mongodb://<username>:<password>@cluster0-shard-00-00.emqen.mongodb.net:27017,cluster0-shard-00-01.emqen.mongodb.net:27017,cluster0-shard-00-02.emqen.mongodb.net:27017/<dbname>?ssl=true&replicaSet=atlas-y2z8ln-shard-0&authSource=admin&retryWrites=true&w=majority";
+MongoClient.connect(uri, function(err, client) {
+  const collection = client.db("test").collection("devices");
+  // perform actions on the collection object
+  client.close();
+});
 
 
 
