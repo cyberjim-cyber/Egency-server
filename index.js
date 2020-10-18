@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 
 const port = 5000;
 
-const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0-shard-00-00.emqen.mongodb.net:27017,cluster0-shard-00-01.emqen.mongodb.net:27017,cluster0-shard-00-02.emqen.mongodb.net:27017/${process.env.DB_NAME}?ssl=true&replicaSet=atlas-y2z8ln-shard-0&authSource=admin&retryWrites=true&w=majority`;
+const uri = `mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0-shard-00-00.emqen.mongodb.net:27017,cluster0-shard-00-01.emqen.mongodb.net:27017,cluster0-shard-00-02.emqen.mongodb.net:27017/${process.env.DB_NAME}?ssl=true&replicaSet=atlas-y2z8ln-shard-0&authSource=admin&retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 client.connect((err) => {
