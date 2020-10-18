@@ -12,13 +12,15 @@ app.use(bodyParser.json());
 
 const port = 5000;
 
-const uri = `mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0-shard-00-00.emqen.mongodb.net:27017,cluster0-shard-00-01.emqen.mongodb.net:27017,cluster0-shard-00-02.emqen.mongodb.net:27017/${process.env.DB_NAME}?ssl=true&replicaSet=atlas-y2z8ln-shard-0&authSource=admin&retryWrites=true&w=majority`;
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.emqen.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
+
+
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 client.connect((err) => {
 	const eventsCollection = client.db("egency").collection("social");
 	const baseCollection = client.db("egency").collection("social");
-	console.log("DB connected 🚀");
+	console.log("DB connectedd 🚀");
 
 	/* API: Adding base data */
 	app.post("/addBaseData", (req, res) => {
@@ -92,7 +94,7 @@ client.connect((err) => {
 
 	/* API : Default */
 	app.get("/", (req, res) => {
-		res.send("Hello from Express, API is working 👨🏻‍💻");
+		res.send("Hello from Express, API is workingsss 👨🏻‍💻");
 	});
 });
 
@@ -107,16 +109,14 @@ app.listen(process.env.PORT || port);
 
 
 
-
-// var MongoClient = require('mongodb').MongoClient;
-
-// var uri = "mongodb://<username>:<password>@cluster0-shard-00-00.emqen.mongodb.net:27017,cluster0-shard-00-01.emqen.mongodb.net:27017,cluster0-shard-00-02.emqen.mongodb.net:27017/<dbname>?ssl=true&replicaSet=atlas-y2z8ln-shard-0&authSource=admin&retryWrites=true&w=majority";
-// MongoClient.connect(uri, function(err, client) {
+// const MongoClient = require('mongodb').MongoClient;
+// const uri = "mongodb+srv://<username>:<password>@cluster0.emqen.mongodb.net/<dbname>?retryWrites=true&w=majority";
+// const client = new MongoClient(uri, { useNewUrlParser: true });
+// client.connect(err => {
 //   const collection = client.db("test").collection("devices");
 //   // perform actions on the collection object
 //   client.close();
 // });
-
 
 
 
